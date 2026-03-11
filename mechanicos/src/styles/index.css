@@ -49,7 +49,7 @@
     }
 
     .input-field {
-        @apply w-full bg-surface-900 border border-surface-700 text-surface-100 placeholder-surface-500 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:brand-500 focus:border-transparent transition-all duration-200;
+        @apply w-full bg-surface-900 border border-surface-700 text-surface-100 placeholder-surface-500 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all duration-200;
     }
 
     .card {

@@ -124,8 +124,8 @@ export default function LoginPage() {
                                   onClick={() => setShowPassword(!showPassword)}
                                 >
                                     {showPassword
-                                      ? <EyeOff classname="w-4 h-4 text-surface-500 hover:text-surface-300" />
-                                      : <Eye classname="w-4 h-4 text-surface-500 hover:text-surface-300" />
+                                      ? <EyeOff className="w-4 h-4 text-surface-500 hover:text-surface-300" />
+                                      : <Eye className="w-4 h-4 text-surface-500 hover:text-surface-300" />
                                     }
                                 </button>
                             </div>
@@ -146,7 +146,7 @@ export default function LoginPage() {
 
                     <p className="mt-8 text-center text-surface-400 text-sm">
                         Don't have an account?{' '}
-                        <Link tp="/register" className="text-brand-400 hover:text-brand-300 font-medium transition-colors">
+                        <Link to="/register" className="text-brand-400 hover:text-brand-300 font-medium transition-colors">
                           Register your workshop
                         </Link>
                     </p>

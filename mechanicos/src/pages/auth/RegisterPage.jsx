@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Wrench, Mail, Lock, User, Building2, Phone } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { Input } from '../../components/ui/Input'
@@ -42,8 +42,20 @@ export default function RegisterPage() {
         if (!form.email) e.email = 'Email is required'
         if (!form.password || form.password.length < 8) e.password = 'Password must be at least 8 characters'
         if (form.password !== form.confirm_password) e.confirm_password = 'Passwords do not match'
-        setErrors(e)
-        return Object.keys(e).length === 0
+       // setErrors(e)
+       // return Object.keys(e).length === 0
+
+       console.log('Validation errors found:', e)
+       console.log('Current form state:', {
+        first_name: form.first_name,
+        last_name: form.last_name,
+        email: form.email,
+        password: form.password ? '(filled)' : '(empty)',
+        confirm_password: form.confirm_password ? '(filled)' : '(empty)',
+       })
+
+       setErrors(e)
+       return Object.keys(e).length === 0
     }
 
     const handleNext = () => {
@@ -52,29 +64,29 @@ export default function RegisterPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log('Submit fired')
+        console.log('Form data:', form)
+
         if (!validateStep2()) return
+        console.log('Validation passed, proceeding...')
         setLoading(true)
 
         try {
+            console.log('Creating company via secure function...')
             // 1. Create the company first
-            const { data: company, error: companyError } = await supabase
-              .from('companies')
-              .insert({
-                name: form.company_name,
-                email: form.company_email,
-                phone: form.company_phone,
+            const { data: companyId, error: companyError } = await supabase
+              .rpc('register_workshop', {
+                company_name: form.company_name,
+                company_email: form.company_email,
+                company_phone: form.company_phone || '',
               })
-              .select()
-              .single()
 
-            if (companyError) throw companyError
+            if (companyError) {
+                console.error('Company error:', companyError)
+                throw companyError
+            }
 
-            // 2. Create the main branch
-            await supabase.from('branches').insert({
-                company_id: company_id,
-                name: 'Main Branch',
-                is_main_branch: true,
-            })
+            console.log('Company created with ID:', companyId)    
 
             // 3. Register the user (trigger auto-create profiles)
             const { error: authError } = await supabase.auth.signUp({
@@ -85,17 +97,22 @@ export default function RegisterPage() {
                         first_name: form.first_name,
                         last_name: form.last_name,
                         role: 'owner',
-                        company_id: company_id,
+                        company_id: companyId,
                     }
                 }
             })
 
-            if (authError) throw authError
+            if (authError) {
+                console.error('Auth error:', authError)
+                throw authError
+            }
 
+            console.log('User created successfully')
             toast.success('Workshop registered! Please check your email to verify your account.')
             navigate('/login')
 
         } catch (err) {
+            console.error('Full error:', err)
             toast.error(err.message || 'Registration failed. Please try again.')
         } finally {
             setLoading(false)
@@ -108,7 +125,7 @@ export default function RegisterPage() {
 
                 {/* Logo */}
                 <div className="flex items-center gap-3 mb-10 justify-center">
-                    <div classname="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center">
                         <Wrench className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-display text-xl font-bold text-white">MechanicOS</span>
@@ -126,7 +143,7 @@ export default function RegisterPage() {
                           ${step >= s ? 'text-white' : 'text-surface-500'}`}>
                           {s === 1 ? 'Your Workshop' : 'Your Account'}
                         </span>
-                        {s <2 && <div classname={`flex-1 h-px ${step > s ? 'bg-brand-600' : 'bg-surface-800'}`} />}
+                        {s <2 && <div className={`flex-1 h-px ${step > s ? 'bg-brand-600' : 'bg-surface-800'}`} />}
                     </div>
                     ))}
                 </div>
@@ -134,7 +151,7 @@ export default function RegisterPage() {
                 <div className="card">
                     {step === 1 ? (
                         <div className="space-y-5">
-                            <div classname="mb-6">
+                            <div className="mb-6">
                                 <h2 className="font-display text-2xl font-bold text-white mb-1">Register your workshop</h2>
                                 <p className="text-surface-400 text-sm">Tell us about your business</p>
                             </div>
@@ -153,7 +170,7 @@ export default function RegisterPage() {
                               placeholder="info@yourworkshop.co.za"
                               icon={Mail}
                               value={form.company_email}
-                              onCHange={(e) => update('company_email', e.target.value)}
+                              onChange={(e) => update('company_email', e.target.value)}
                               error={errors.company_email}
                             />
                             <Input
@@ -161,7 +178,7 @@ export default function RegisterPage() {
                               placeholder="+27 11 000 0000"
                               icon={Phone}
                               value={form.company_phone}
-                              onChange={(e) => update('company_phone', e.taget.value)}
+                              onChange={(e) => update('company_phone', e.target.value)}
                             />
 
                             <button onClick={handleNext} className="btn-primary w-full mt-2">
@@ -171,7 +188,7 @@ export default function RegisterPage() {
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-5">
                             <div className="mb-6">
-                                <h2 classname="font-display text-2xl font-bold text-white mb-1">Create your account</h2>
+                                <h2 className="font-display text-2xl font-bold text-white mb-1">Create your account</h2>
                                 <p className="text-surface-400 text-sm">You'll be the account owner</p>
                             </div>
 
@@ -189,11 +206,20 @@ export default function RegisterPage() {
                                   placeholder="Smith"
                                   icon={User}
                                   value={form.last_name}
-                                  onChange={(e) => update('ast_name', e.taget.value)}
+                                  onChange={(e) => update('last_name', e.target.value)}
                                   error={errors.last_name}
                                 />
                             </div>
 
+                            <Input
+                              label="Your Email"
+                              type="email"
+                              placeholder="john@yourworkshop.co.za"
+                              icon={Mail}
+                              value={form.email}
+                              onChange={(e) => update('email', e.target.value)}
+                              error={errors.email}
+                            />
                             <Input
                               label="Passowrd"
                               type="password"
@@ -208,7 +234,8 @@ export default function RegisterPage() {
                               type="password"
                               placeholder="Repeat your password"
                               icon={Lock}
-                              value={(e) => update('confirm_password', e.target.value)}
+                              value={form.confirm_password}
+                              onChange={(e) => update('confirm_password', e.target.value)}
                               error={errors.confirm_password}
                             />
 

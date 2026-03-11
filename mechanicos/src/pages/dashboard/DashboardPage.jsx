@@ -1,5 +1,5 @@
 import { useAuthStore } from '../../stores/authStore'
-import { Wrench, ClipboardList, Users, Package, TremdingUp, TrendingUp } from 'lucide-react'
+import { Wrench, ClipboardList, Users, Package, TrendingUp } from 'lucide-react'
 
 export default function DashboardPage() {
     const { profile, company } = useAuthStore()
@@ -24,7 +24,7 @@ export default function DashboardPage() {
             {/* Stats Grid */}
             <div className="grid frid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
                 {stats.map((stat) => (
-                    <div key={stat.label} classname="card flex items-center gap-4">
+                    <div key={stat.label} className="card flex items-center gap-4">
                         <div className={`p-3 bg-surface-800 rounded-xl ${stat.color}`}>
                             <stat.icon className="w-5 h-5" />
                         </div>
@@ -38,7 +38,7 @@ export default function DashboardPage() {
 
             {/* Placeholder Panels */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div classname="card">
+                <div className="card">
                     <h2 className="section-title mb-4">Recent Jobs</h2>
                     <div className="flex flex-col items-center justify-center pu-12 text-surface-500">
                         <Wrench className="w-10 h-10 mb-3 opacity-30" />
@@ -47,8 +47,8 @@ export default function DashboardPage() {
                 </div>
                 <div className="card">
                     <h2 className="section-title mb-4">Upcoming Bookings</h2>
-                    <div classname="flex flex-col items-center justify-center py-12 text-surface-500">
-                        <ClipboardList classname="w-10 h-10 mb-3 opacity-30" />
+                    <div className="flex flex-col items-center justify-center py-12 text-surface-500">
+                        <ClipboardList className="w-10 h-10 mb-3 opacity-30" />
                         <p className="text-sm">No booking scheduled.</p>
                     </div>
                 </div>

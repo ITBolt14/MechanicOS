@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { Toaster } from "react-hot-toast"
-import { useAuth } from "./hooks/useAuth"
-import { ProtectedRoute } from "./components/auth/ProtectedRoute"
-import { AppLayout } from "./components/layout/AppLayout"
-import LoginPage from "./pages/auth/LoginPage"
-import RegisterPage from "./pages/auth/RegisterPage"
-import DashboardPage from "./pages/dashboard/DashboardPage"
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import { useAuth } from './hooks/useAuth'
+import { ProtectedRoute } from './components/auth/ProtectedRoute'
+import { AppLayout } from './components/layout/AppLayout'
+import LoginPage from './pages/auth/LoginPage'
+import RegisterPage from './pages/auth/RegisterPage'
+import DashboardPage from './pages/dashboard/DashboardPage'
 
 function App() {
   useAuth() // Initialise auth state

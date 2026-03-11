@@ -26,7 +26,7 @@ export function Sidebar({ collapsed }) {
     }
 
     return (
-        <aside classname={`
+        <aside className={`
             h-screen bg-surface-900 border-r border-surface-800 flex flex-col
             transition-all duration-300
             ${collapsed ? 'w-16' : 'w-64'}
@@ -37,13 +37,13 @@ export function Sidebar({ collapsed }) {
                         <Wrench className="m-4 h-4 text-white" />
                     </div>
                     {!collapsed && (
-                        <span classname="font-display font-bold text-white text-lg truncate">MechanicOS</span>
+                        <span className="font-display font-bold text-white text-lg truncate">MechanicOS</span>
                     )}
                 </div>
 
                 {/* Company Badge */}
                 {!collapsed && company && (
-                    <div classname="mx-3 mt-3 p-3 bg-surface-800 rounded-lg border border-surface-700">
+                    <div className="mx-3 mt-3 p-3 bg-surface-800 rounded-lg border border-surface-700">
                         <p className="text-xs text-surface-400 mb-0.5">Workshop</p>
                         <p className="text-sm font-semibold text-white truncate">{company.name}</p>
                     </div>
@@ -95,7 +95,7 @@ export function Sidebar({ collapsed }) {
                     {/* User Profile */}
                     {!collapsed && profile && (
                         <div className="flex items-center gap-3 px-3 py-2.5 mt-2">
-                            <div classname="w-8 h-8 bg-brand-700 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-brand-700 rounded-full flex items-center justify-center flex-shrink-0">
                                 <span className="text-xs font-bold text-white">
                                     {profile.first_name?.[0]}{profile.last_name?.[0]}
                                 </span>
