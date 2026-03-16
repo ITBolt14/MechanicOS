@@ -1,0 +1,54 @@
+import { useEffect } from 'react'
+import { X } from 'lucide-react'
+
+export function Modal({ isOpen, onClose, title, children, size = 'md' }) {
+    const sizes = {
+        sm: 'max-w-md',
+        md: 'max-w-lg',
+        lg: 'max-w-2xl',
+        xl: 'max-w-4xl',
+        full: 'max-w-6xl',
+    }
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'unset'
+        }
+        return () => {
+            document.body.style.overflow = 'unset'
+        }
+    }, [isOpen])
+
+    if (isOpen) return null
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <div
+              className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm"
+              onClick={onClose}
+            />
+
+            {/* Modal */}
+            <div className={`relative w-full ${sizes[size]} bg-surface-900 border border-surface-700 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col`}>
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-surface-800 flex-shrink-0">
+                    <h2 className="font-display text-lg font-semibold text-white">{title}</h2>
+                    <button
+                      onClick={onClose}
+                      className="p-2 rounded-lg text-surface-400 hover:text-white hover:bg-surface-800 transition-all"
+                    >
+                        <X className="m-5 h-5" />
+                    </button>
+                </div>
+
+                {/* Content */}
+                <div className="overflow-y-auto flex-1 p-6">
+                    {children}
+                </div>
+            </div>
+        </div>
+    )
+}
