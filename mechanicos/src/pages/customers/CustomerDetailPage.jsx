@@ -157,7 +157,7 @@ export default function CustomerDetailPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Contact Info */}
                     <div className="card space-y-4">
-                        <h2 classname="section-title">Contact Information</h2>
+                        <h2 className="section-title">Contact Information</h2>
                         <div className="space-y-3">
                             {customer.phone && (
                                 <div className="flex items-center gap-3">
@@ -215,7 +215,7 @@ export default function CustomerDetailPage() {
                     {/* Stats */}
                     <div className="card space-y-4">
                         <h2 className="section-title">Summary</h2>
-                        <div classname="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-4">
                             {[
                                 { label: 'Vehicles', value: vehicles.length, icon: Car, color: 'text-emerald-400' },
                                 { label: 'Total Jobs', value: '0', icon: Car, color: 'text-brand-400' },
@@ -238,8 +238,8 @@ export default function CustomerDetailPage() {
 
             {activeTap === 'Vehicles' && (
                 <div className="card">
-                    <div classname="flex items-center justify-between mb-6">
-                        <h2 classname="section-title">Vehicles ({vehicles.length})</h2>
+                    <div className="flex items-center justify-between mb-6">
+                        <h2 className="section-title">Vehicles ({vehicles.length})</h2>
                         <button
                           onClick={() => navigate(`/vehicles/new?customer_id=${id}`)}
                           className="btn-primary flex items-center gap-2 text-sm py-2"

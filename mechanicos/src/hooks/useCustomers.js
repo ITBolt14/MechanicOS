@@ -45,7 +45,7 @@ export function useCustomers() {
     const createCustomer = async (customerData) => {
         const { data, error } = await supabase
           .from('customers')
-          .insert({ ...customerData, company_id: compamny.id })
+          .insert({ ...customerData, company_id: company.id })
           .select()
           .single()
 

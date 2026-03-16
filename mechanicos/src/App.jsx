@@ -3,9 +3,24 @@ import { Toaster } from 'react-hot-toast'
 import { useAuth } from './hooks/useAuth'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { AppLayout } from './components/layout/AppLayout'
+
+// Auth Pages
 import LoginPage from './pages/auth/LoginPage'
 import RegisterPage from './pages/auth/RegisterPage'
+
+// Dashboard
 import DashboardPage from './pages/dashboard/DashboardPage'
+
+// Customer Pages
+import CustomersPage from './pages/customers/CustomersPage'
+import CustomerDetailPage from './pages/customers/CustomerDetailPage'
+import CustomerFormPage from './pages/customers/CustomerFormPage'
+
+// Vehicle Pages
+import VehiclesPage from './pages/vehicles/VehiclesPage'
+import VehicleDetailPage from './pages/vehicles/VehicleDetailPage'
+import VehicleFormPage from './pages/vehicles/VehicleFormPage'
+import InspectionFormPage from './pages/vehicles/InspectionFormPage'
 
 function App() {
   useAuth() // Initialise auth state
@@ -35,10 +50,24 @@ function App() {
           <ProtectedRoute>
             <AppLayout />
           </ProtectedRoute>
-        }>
+        }
+      >
+        {/* Dashboard */}
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<DashboardPage />} />
-          {/* More routes addid in future phases */}
+
+        {/* Customers */}
+        <Route path="customers" element={<CustomersPage />} />
+        <Route path="customers/new" element={<CustomerFormPage />} />
+        <Route path="customers/:id" element={<CustomerDetailPage />} />
+        <Route path="customers/:id/edit" element={<CustomerFormPage />} />
+
+        {/* Vehicles */}
+        <Route path="vehicles" element={<VehiclesPage />} />
+        <Route path="vehicles/new" element={<VehicleFormPage />} />
+        <Route path="vehicles/:id" element={<VehicleDetailPage />} />
+        <Route path="vehicles/:id/edit" element={<VehicleFormPage />} />
+        <Route path="vehicles/:id/inspection" element={<InspectionFormPage />} />
         </Route>
 
         {/* Fallback */}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigation, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, User, Building2 } from 'lucide-react'
 import { useCustomers } from '../../hooks/useCustomers'
 import { Input } from '../../components/ui/Input'

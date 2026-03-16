@@ -3,7 +3,7 @@ import { X } from 'lucide-react'
 
 const DAMAGE_AREAS = [
     { id: 'front bumper', label: 'Front Bumper', x: 47, y: 8 },
-    { id: 'bonnet', label: 'Bonnet', x: 47, y18 },
+    { id: 'bonnet', label: 'Bonnet', x: 47, y: 18 },
     { id: 'windscreen', label: 'Windscreen', x: 47, y: 27 },
     { id: 'roof', label: 'Roof', x: 47, y: 37 },
     { id: 'rear_windscreen', label: 'Rear Windscreen', x: 47, y: 47 },
@@ -107,7 +107,7 @@ export function InspectionDiagram({ damagePoints = [], onChange }) {
                     <input
                       type="text"
                       placeholder="Describe the damage (optional)"
-                      classname="input-field text-sm"
+                      className="input-field text-sm"
                       value={note}
                       onChange={(e) => setNote(e.target.value)}
                     />
@@ -134,7 +134,7 @@ export function InspectionDiagram({ damagePoints = [], onChange }) {
                                   onClick={() => onChange(damagePoints.filter((p) => p.area !== point.area))}
                                   className="ml-1 text-surface-500 hover:text-red-400"
                                 >
-                                    <X classname="w-3 h-3" />
+                                    <X className="w-3 h-3" />
                                 </button>
                             </div>
                         ))}

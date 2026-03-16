@@ -225,7 +225,7 @@ export default function VehicleDetailPage() {
                         </div>
 
                         {vehicle.notes && (
-                            <div classname="card">
+                            <div className="card">
                                 <h2 className="section-title mb-3">Notes</h2>
                                 <p className="text-sm text-surface-300 leading-relaxed">{vehicle.notes}</p>
                             </div>

@@ -63,7 +63,7 @@ export function VehicleTable({ vehicles, onDelete, showCustomer = true }) {
                             </td>
                             {showCustomer && (
                                 <td className="py-4 pr-4">
-                                    <div classname="flex items-center gap-2">
+                                    <div classNname="flex items-center gap-2">
                                         <User className="w-3.5 h-3.5 text-surface-500" />
                                         <span className="text-sm text-surface-300">
                                             {getCustomerName(vehicle.customers)}

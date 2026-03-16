@@ -51,7 +51,7 @@ export function CommunicationLog({ customerId }) {
     return (
         <div className="space-y-4">
             {/* Add Log Button */}
-            <div classname="flex items-center justify-between">
+            <div className="flex items-center justify-between">
                 <h3 className="section-title">Communication History</h3>
                 <button
                   onClick={() => setShowForm(!showForm)}
