@@ -16,6 +16,14 @@ export default function CustomersPage() {
     const [deleteTarget, setDeleteTarget] = useState(null)
     const [deleting, setDeleting] = useState(false)
 
+    const handleDelete = async () => {
+        if (!deleteTarget) return
+        setDeleting(true)
+        await deleteCustomer(deleteTarget.id)
+        setDeleting(false)
+        setDeleteTarget(null)
+    }
+
     const handleSearch = async (value) => {
         setSearch(value)
         if (!value.trim()) {
@@ -55,7 +63,7 @@ export default function CustomersPage() {
                     </button>
                     <button
                       onClick={() => navigate('/customers/new')}
-                      className="btn-primary felx items-center gap-2"
+                      className="btn-primary flex items-center gap-2"
                     >
                         <Plus className="w-4 h-4" />
                         Add Customer
@@ -116,7 +124,7 @@ export default function CustomersPage() {
 
             {/* Delete Confirm */}
             <ConfirmDialog
-              isOpen={!deleteTarget}
+              isOpen={!!deleteTarget}
               onClose={() => setDeleteTarget(null)}
               onConfirm={handleDelete}
               loading={deleting}

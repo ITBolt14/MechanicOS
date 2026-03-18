@@ -18,7 +18,7 @@ export function VehicleTable({ vehicles, onDelete, showCustomer = true }) {
             electric: 'success',
             hybrid: 'purple',
         }
-        return map[fuel] || 'deafult'
+        return map[fuel] || 'default'
     }
 
     return (
@@ -45,8 +45,8 @@ export function VehicleTable({ vehicles, onDelete, showCustomer = true }) {
                         >
                             <td className="py-4 pr-4">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-9 h-9 bg-emerald-500 bg-opacity-10 rounded-xl flex items-center justify-center flex-shirnk-0">
-                                        <Car className="2-4 h-4 text-emerald-400" />
+                                    <div className="w-9 h-9 bg-emerald-500 bg-opacity-10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <Car className="w-4 h-4 text-emerald-400" />
                                     </div>
                                     <div>
                                         <p className="text-sm font-semibold text-white">
@@ -63,7 +63,7 @@ export function VehicleTable({ vehicles, onDelete, showCustomer = true }) {
                             </td>
                             {showCustomer && (
                                 <td className="py-4 pr-4">
-                                    <div classNname="flex items-center gap-2">
+                                    <div className="flex items-center gap-2">
                                         <User className="w-3.5 h-3.5 text-surface-500" />
                                         <span className="text-sm text-surface-300">
                                             {getCustomerName(vehicle.customers)}
@@ -78,7 +78,7 @@ export function VehicleTable({ vehicles, onDelete, showCustomer = true }) {
                             </td>
                             <td className="py-4 pr-4">
                                 <span className="text-sm text-surface-400">
-                                    {vehicle.current_mileage ? `${vehicle.current_mileage.toLocalString()} km` : '-'}
+                                    {vehicle.current_mileage ? `${vehicle.current_mileage.toLocaleString()} km` : '-'}
                                 </span>
                             </td>
                             <td className="py-4">
@@ -88,7 +88,7 @@ export function VehicleTable({ vehicles, onDelete, showCustomer = true }) {
                                         e.stopPropagation()
                                         onDelete(vehicle)
                                       }}
-                                      className="p-2 rounded-lg text-surface-500 hover:text-red-400 hover:bg-surface800 transition-all opacity-0 group-hover:opacity-100"
+                                      className="p-2 rounded-lg text-surface-500 hover:text-red-400 hover:bg-surface-800 transition-all opacity-0 group-hover:opacity-100"
                                     >
                                         <Trash2 className="w-4 h-4" />
                                     </button>

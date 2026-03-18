@@ -28,7 +28,7 @@ const CHECKLIST_ITEMS = [
 export default function InspectionFormPage() {
     const navigate = useNavigate()
     const { id } = useParams()
-    const { getVehicle } = useVehicle()
+    const { getVehicle } = useVehicles()
     const { createInspection } = useInspections()
 
     const [vehicle, setVehicle] = useState(null)
@@ -66,7 +66,7 @@ export default function InspectionFormPage() {
             ...prev,
             checklist: {
                 ...prev.checklist,
-                [itemId]: !prev.checklist[itemid],
+                [itemId]: !prev.checklist[itemId],
             },
         }))
     }
@@ -266,7 +266,7 @@ export default function InspectionFormPage() {
                             >
                                 {form.checklist[item.id] && (
                                     <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 1314 4L19 7" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                     </svg>
                                 )}
                             </div>
@@ -292,7 +292,7 @@ export default function InspectionFormPage() {
 
                 {/* Summary before submit */}
                 <div className="card bg-surface-800 border-surface-700">
-                    <h2 className="section-title mb-4">Insppection Summary</h2>
+                    <h2 className="section-title mb-4">Inspection Summary</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
                             {

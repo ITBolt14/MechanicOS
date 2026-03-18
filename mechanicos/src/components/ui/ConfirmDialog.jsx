@@ -3,7 +3,7 @@ import { Modal } from "./Modal"
 import { Spinner } from './Spinner'
 
 
-export function ConfirmDialog({ isOpen, onClose, onConfirm, title, message,confirmLabel = 'Configure', loading = false, variant = 'danger' }) {
+export function ConfirmDialog({ isOpen, onClose, onConfirm, title, message,confirmLabel = 'Confirm', loading = false, variant = 'danger' }) {
     const variants = {
         danger: 'bg-red-600 hover:bg-red-500',
         warning: 'bg-amber-600 hover:bg-amber-500',
@@ -11,7 +11,7 @@ export function ConfirmDialog({ isOpen, onClose, onConfirm, title, message,confi
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} title={title} size="sm">
-            <div className="felx flex-col items-center text-center gap-4">
+            <div className="flex flex-col items-center text-center gap-4">
                 <div className="w-14 h-14 bg-red-500 bg-opacity-10 rounded-full flex items-center justify-center">
                     <AlertTriangle className="w-7 h-7 text-red-400" />
                 </div>
@@ -25,7 +25,7 @@ export function ConfirmDialog({ isOpen, onClose, onConfirm, title, message,confi
                         Cancel
                     </button>
                     <button
-                      onClick={onConfig}
+                      onClick={onConfirm}
                       disabled={loading}
                       className={`flex-1 flex items-center justify-center gap-2 text-white font-semibold px-4 py-2.5 rounded-lg transition-all duration-200 disabled:opacity-50 ${variants[variant]}`}
                     >

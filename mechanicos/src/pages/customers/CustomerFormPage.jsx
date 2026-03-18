@@ -85,7 +85,7 @@ export default function CustomerFormPage() {
           : await createCustomer(form)
 
         setLoading(false)
-        if (result) navigate(isEditing ? '/customers/${id}' : '/customers')
+        if (result) navigate(isEditing ? `/customers/${id}` : '/customers')
     }
 
     if (fetching) {
@@ -188,7 +188,8 @@ export default function CustomerFormPage() {
                             <Input
                               label="Registration Number (optional)"
                               placeholder="2023/123456/07"
-                              value={(e) => update('id_number', e.target.validate)}
+                              value={form.id_number}
+                              onChange={(e) => update('id_number', e.target.value)}
                             />
                         </div>
                     )}
@@ -235,7 +236,7 @@ export default function CustomerFormPage() {
                               onChange={(e) => update('address_line1', e.target.value)}
                             />
                         </div>
-                        <div className="col=span-2">
+                        <div className="-span-2">
                             <Input
                               label="Address Line 2"
                               placeholder="Suburb"

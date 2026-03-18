@@ -47,7 +47,7 @@ export default function LoginPage() {
             {/* Left Panel - Branding */}
             <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-surface-900 via-surface-950 to-brand-950 flex-col justify-between p-12 border-r border-surface-800">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-brand-600 reounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center">
                     <Wrench className="w-5 h-5 text-white" />
                 </div>
                 <span className="font-display text-xl font-bold text-white">MechanicOS</span>
@@ -58,7 +58,7 @@ export default function LoginPage() {
                     Run your workshop.<br />
                     <span className="text-brand-400">Smarter.</span>
                 </h1>
-                <p className="text-surface-400 text-lg lending-relaxed max-w-md">
+                <p className="text-surface-400 text-lg leading-relaxed max-w-md">
                     The complete workshop management system built for modern mechanical and panel beating businesses.
                 </p>
               </div>
@@ -83,7 +83,7 @@ export default function LoginPage() {
 
                     {/* Mobile Logo */}
                     <div className="flex items-center gap-3 mb-10 lg:hidden">
-                        <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify center">
+                        <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center">
                             <Wrench className="w-5 h-5 text-white" />
                         </div>
                         <span className="font-display text-xl font-bold text-white">MechanicOS</span>

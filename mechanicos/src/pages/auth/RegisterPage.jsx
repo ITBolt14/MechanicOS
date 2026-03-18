@@ -42,17 +42,6 @@ export default function RegisterPage() {
         if (!form.email) e.email = 'Email is required'
         if (!form.password || form.password.length < 8) e.password = 'Password must be at least 8 characters'
         if (form.password !== form.confirm_password) e.confirm_password = 'Passwords do not match'
-       // setErrors(e)
-       // return Object.keys(e).length === 0
-
-       console.log('Validation errors found:', e)
-       console.log('Current form state:', {
-        first_name: form.first_name,
-        last_name: form.last_name,
-        email: form.email,
-        password: form.password ? '(filled)' : '(empty)',
-        confirm_password: form.confirm_password ? '(filled)' : '(empty)',
-       })
 
        setErrors(e)
        return Object.keys(e).length === 0
@@ -64,15 +53,11 @@ export default function RegisterPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('Submit fired')
-        console.log('Form data:', form)
 
         if (!validateStep2()) return
-        console.log('Validation passed, proceeding...')
         setLoading(true)
 
         try {
-            console.log('Creating company via secure function...')
             // 1. Create the company first
             const { data: companyId, error: companyError } = await supabase
               .rpc('register_workshop', {
@@ -84,9 +69,7 @@ export default function RegisterPage() {
             if (companyError) {
                 console.error('Company error:', companyError)
                 throw companyError
-            }
-
-            console.log('Company created with ID:', companyId)    
+            }   
 
             // 3. Register the user (trigger auto-create profiles)
             const { error: authError } = await supabase.auth.signUp({
@@ -107,7 +90,6 @@ export default function RegisterPage() {
                 throw authError
             }
 
-            console.log('User created successfully')
             toast.success('Workshop registered! Please check your email to verify your account.')
             navigate('/login')
 
@@ -136,7 +118,7 @@ export default function RegisterPage() {
                     {[1, 2].map((s) => (
                         <div key={s} className="flex items-center gap-3 flex-1">
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all
-                              ${step >= s ? 'bg-brand-600 text-white' : 'bg-surface-800 text-surface -500'}`}>
+                              ${step >= s ? 'bg-brand-600 text-white' : 'bg-surface-800 text-surface-500'}`}>
                             {s}
                         </div>
                         <span className={`text-sm font-medium transition-all
@@ -221,7 +203,7 @@ export default function RegisterPage() {
                               error={errors.email}
                             />
                             <Input
-                              label="Passowrd"
+                              label="Password"
                               type="password"
                               placeholder="Min. 8 characters"
                               icon={Lock}

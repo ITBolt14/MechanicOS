@@ -17,7 +17,7 @@ export function AppLayout() {
                       onClick={() => setCollapsed(!collapsed)}
                       className="p-2 rounded-lg text-surface-400 hover:text-white hover:bg-surface-800 transition-all"
                     >
-                        <Menu className="w-5h-5" />
+                        <Menu className="w-5 h-5" />
                     </button>
                 </header>
 

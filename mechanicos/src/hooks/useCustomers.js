@@ -30,7 +30,7 @@ export function useCustomers() {
 
     const getCustomer = async (id) => {
         const { data, error } = await supabase
-          .from('customer')
+          .from('customers')
           .select('*')
           .eq('id', id)
           .single()
@@ -55,7 +55,7 @@ export function useCustomers() {
         }
         toast.success('Customer created successfully')
         await fetchCustomers()
-        return DataTransfer
+        return data
     }
 
     const updateCustomer = async (id, customerData) => {

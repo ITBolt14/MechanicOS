@@ -21,7 +21,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }) {
         }
     }, [isOpen])
 
-    if (isOpen) return null
+    if (!isOpen) return null
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -40,7 +40,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }) {
                       onClick={onClose}
                       className="p-2 rounded-lg text-surface-400 hover:text-white hover:bg-surface-800 transition-all"
                     >
-                        <X className="m-5 h-5" />
+                        <X className="w-5 h-5" />
                     </button>
                 </div>
 

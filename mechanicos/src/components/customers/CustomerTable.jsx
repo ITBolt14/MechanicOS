@@ -12,7 +12,7 @@ export function CustomerTable({ customers, onDelete }) {
 
     return (
         <div className="overflow-x-auto">
-            <table className="w.full">
+            <table className="w-full">
                 <thead>
                     <tr className="border-b border-surface-800">
                         <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3 pr-4">Customer</th>
@@ -23,11 +23,11 @@ export function CustomerTable({ customers, onDelete }) {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-surface-800">
-                    {customers.map((customer) => {
+                    {customers.map((customer) => (
                         <tr
                           key={customer.id}
                           className="hover:bg-surface-800 hover:bg-opacity-50 transition-colors curson-pointer group"
-                          onClick={() => navigate(`/customer/${customer.id}`)}
+                          onClick={() => navigate(`/customers/${customer.id}`)}
                         >
                             <td className="py-4 pr-4">
                                 <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ export function CustomerTable({ customers, onDelete }) {
                                 </Badge>
                             </td>
                             <td className="py-4 pr-4">
-                                <div className="space-y--1">
+                                <div className="space-y-1">
                                     {customer.phone && (
                                         <div className="flex items-center gap-1.5 text-xs text-surface-400">
                                             <Phone className="w-3 h-3" />
@@ -84,7 +84,7 @@ export function CustomerTable({ customers, onDelete }) {
                                 </div>
                             </td>
                         </tr>
-                    })}
+                    ))}
                 </tbody>
             </table>
         </div>

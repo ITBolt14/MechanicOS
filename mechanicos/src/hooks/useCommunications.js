@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuthStore } from '../stores/authStore'
 import toast from 'react-hot-toast'
-import { data } from 'react-router-dom'
 
 export function useCommunications() {
     const { company, profile } = useAuthStore()
@@ -24,7 +23,7 @@ export function useCommunications() {
             )
         `)
         .eq('customer_id', customerId)
-        .order('created_at', { asccending: false })
+        .order('created_at', { ascending: false })
 
     if (error) {
         toast.error('Failed to load communication logs')

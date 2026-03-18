@@ -7,7 +7,7 @@ import { EmptyState } from "../../components/ui/EmptyState"
 import { ConfirmDialog } from "../../components/ui/ConfirmDialog"
 import { Spinner } from "../../components/ui/Spinner"
 
-export default function VehiclePage() {
+export default function VehiclesPage() {
     const navigate = useNavigate()
     const { vehicles, loading, fetchVehicles, deleteVehicle, searchVehicles } = useVehicles()
     const [search, setSearch] = useState('')
@@ -126,7 +126,7 @@ export default function VehiclePage() {
               loading={deleting}
               title="Remove Vehicle"
               message={`Are you sure you want to remove ${deleteTarget
-                ? '${deleteTarget.year} ${deleteTarget.make} ${deleteTarget.model}'
+                ? `${deleteTarget.year} ${deleteTarget.make} ${deleteTarget.model}`
                 : 'this vehicle'}? This action cannot be undone.`}
               confirmLabel="Remove Vehicle"
             />

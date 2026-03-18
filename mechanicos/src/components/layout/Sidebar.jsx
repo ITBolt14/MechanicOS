@@ -53,7 +53,7 @@ function NavGroup({ item, collapsed }) {
             <NavLink
               to={item.to}
               className={({ isActive }) => `
-                flex items-center gap-3 px-3 py-2.5 reounded-lg text-sm font-medium
+                flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
                 transition-all duration-200
                 ${isActive
                     ? 'bg-brand-600 text-white'
@@ -88,7 +88,7 @@ function NavGroup({ item, collapsed }) {
 
             {/* Group Children */}
             {(open || collapsed) && (
-                <div className={`space-y-1 ${!collapsed ? 'ml-2 pl-2 border-1 border-surface-800' : ''}`}>
+                <div className={`space-y-1 ${!collapsed ? 'ml-2 pl-2 border-l border-surface-800' : ''}`}>
                     {item.children.map((child) => (
                         <NavLink
                           key={child.to}
@@ -129,7 +129,7 @@ export function Sidebar({ collapsed }) {
             `}>
                 {/* Logo */}
                 <div className="h-16 flex items-center gap-3 px-4 border-b border-surface-800 flex-shrink-0">
-                    <div className="m-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Wrench className="w-4 h-4 text-white" />
                     </div>
                     {!collapsed && (

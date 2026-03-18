@@ -162,7 +162,7 @@ export default function DashboardPage() {
                                     </div>
                                     <div className="text-left flex-1 min-w-0">
                                         <p className="text-sm font-medium text-white truncate">
-                                            {customer.company_type === 'company'
+                                            {customer.customer_type === 'company'
                                               ? customer.company_name
                                             : `${customer.first_name} ${customer.last_name}`
                                             }
@@ -190,7 +190,7 @@ export default function DashboardPage() {
                         </button>
                     </div>
                     {vehiclesLoading ? (
-                        <div className="flex justify-center pu-6"><Spinner /></div>
+                        <div className="flex justify-center py-6"><Spinner /></div>
                     ) : vehicles.length === 0 ? (
                         <div className="text-center py-8">
                             <p className="text-surface-500 text-sm mb-3">No vehicles yet</p>
@@ -204,10 +204,10 @@ export default function DashboardPage() {
                         </div>
                     ) : (
                         <div className="space-y-2">
-                            {vehicles.slice(0, 5).map((vehicles) => (
+                            {vehicles.slice(0, 5).map((vehicle) => (
                                 <button
-                                  key={vehicles.id}
-                                  onClick={() => navigate(`/vehicles/${vehicles.id}`)}
+                                  key={vehicle.id}
+                                  onClick={() => navigate(`/vehicles/${vehicle.id}`)}
                                   className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-surface-800 transition-all group"
                                 >
                                     <div className="w-9 h-9 bg-emerald-500 bg-opacity-10 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -215,10 +215,10 @@ export default function DashboardPage() {
                                     </div>
                                     <div className="text-left flex-1 min-w-0">
                                         <p className="text-sm font-medium text-white truncate">
-                                            {vehicles.year} {vehicles.make} {vehicles.model}
+                                            {vehicle.year} {vehicle.make} {vehicle.model}
                                         </p>
                                         <p className="text-xs font-mono text-surface-500">
-                                            {vehicles.registration_number || 'No Plate'}
+                                            {vehicle.registration_number || 'No Plate'}
                                         </p>
                                     </div>
                                     <ArrowRight className="w-4 h-4 text-surface-600 group-hover:text-surface-300 flex-shrink-0 transition-colors" />

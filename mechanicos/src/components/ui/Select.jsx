@@ -1,6 +1,6 @@
 export function Select({ label, error, options = [], placeholder, ...props }) {
     return (
-        <div className="w.full">
+        <div className="w-full">
             {label && <label className="label">{label}</label>}
             <select
               className={`input-field ${error ? 'border-red-500 focus:ring-red-500' : ''}`}

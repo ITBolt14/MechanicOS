@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Phone, Mail, MessageSquare, FileText, Plus, Trash2 } from 'lucide-react'
 import { useCommunications } from "../../hooks/useCommunications"
 import { Badge } from "../ui/Badge"
@@ -34,7 +34,7 @@ export function CommunicationLog({ customerId }) {
         setSubmitting(false)
     }
 
-    useState(() => {
+    useEffect(() => {
         fetchLogs(customerId)
     }, [customerId])
 
@@ -109,7 +109,7 @@ export function CommunicationLog({ customerId }) {
                 </div>
     )}
 
-    {/* Log Timeline} */}
+    {/* Log Timeline */}
     {loading ? (
         <div className="flex justify-center py-8"><Spinner /></div>
     ) : logs.length === 0 ? (
@@ -124,7 +124,7 @@ export function CommunicationLog({ customerId }) {
                 return (
                     <div key={log.id} className="flex gap-4 group">
                         <div className="flex flex-col items-center">
-                            <div className="m-8 h-8 bg-surface-800 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-surface-800 rounded-full flex items-center justify-center flex-shrink-0">
                                 <Icon className="w-3.5 h-3.5 text-surface-400" />
                             </div>
                             <div className="flex-1 w-px bg-surface-800 mt-2" />
@@ -145,7 +145,7 @@ export function CommunicationLog({ customerId }) {
                                   onClick={() => deleteLog(log.id, customerId)}
                                   className="ml-auto p-1 rounded text-surface-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all"
                                 >
-                                    <Trash2 className="m-3.5 h-3.5" />
+                                    <Trash2 className="w-3.5 h-3.5" />
                                 </button>
                             </div>
                             <p className="text-sm text-surface-300 leading-relaxed">{log.content}</p>

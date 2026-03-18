@@ -22,7 +22,6 @@ export function useVehicles(customerId = null) {
               first_name,
               last_name,
               company_name,
-              customer_name,
               customer_type,
               phone,
               email

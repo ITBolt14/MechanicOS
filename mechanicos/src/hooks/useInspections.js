@@ -38,7 +38,7 @@ export function useInspections() {
           .insert({
             ...inspectionData,
             company_id: company.id,
-            inspection_by: profile.id,
+            inspected_by: profile.id,
           })
           .select()
           .single()

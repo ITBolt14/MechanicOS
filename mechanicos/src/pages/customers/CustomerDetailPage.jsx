@@ -57,9 +57,9 @@ export default function CustomerDetailPage() {
         setDeleteVehicleTarget(null)
     }
 
-    if (!loading) {
+    if (loading) {
         return (
-            <div className="felx items-center justify-center min-h- screen">
+            <div className="flex items-center justify-center min-h- screen">
                 <Spinner size="lg" />
             </div>
         )
@@ -69,7 +69,7 @@ export default function CustomerDetailPage() {
         return (
             <div className="p-6">
                 <EmptyState
-                  idon={User}
+                  icon={User}
                   title="Customer not found"
                   description="This customer may have been removed."
                   action={
@@ -91,7 +91,7 @@ export default function CustomerDetailPage() {
                         <ArrowLeft className="w-5 h-5" />
                     </button>
                     <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 bg-brand-600 bg-opcity-20 rounded-2xl flex items-center justify-between">
+                        <div className="w-14 h-14 bg-brand-600 bg-opacity-20 rounded-2xl flex items-center justify-center">
                             {customer.customer_type === 'company'
                               ? <Building2 className="w-7 h-7 text-brand-400" />
                               : <User className="w-7 h-7 text-brand-400" />
@@ -119,14 +119,14 @@ export default function CustomerDetailPage() {
                         <Trash2 className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => navigate('/customers/${id}/edit')}
+                      onClick={() => navigate(`/customers/${id}/edit`)}
                       className="btn-secondary flex items-center gap-2"
                     >
                         <Edit className="w-4 h-4" />
                         Edit
                     </button>
                     <button
-                      onClick={() => navigate('/vehicles/new?customer_id=${id}')}
+                      onClick={() => navigate(`/vehicles/new?customer_id=${id}`)}
                       className="btn-primary flex items-center gap-2"
                     >
                         <Plus className="w-4 h-4" />
@@ -236,7 +236,7 @@ export default function CustomerDetailPage() {
                 </div>
             )}
 
-            {activeTap === 'Vehicles' && (
+            {activeTab === 'Vehicles' && (
                 <div className="card">
                     <div className="flex items-center justify-between mb-6">
                         <h2 className="section-title">Vehicles ({vehicles.length})</h2>
@@ -260,7 +260,7 @@ export default function CustomerDetailPage() {
                               onClick={() => navigate(`/vehicles/new?customer_id=${id}`)}
                               className="btn-primary flex items-center gap-2"
                             >
-                                <plus className="w-4 h-4" />
+                                <Plus className="w-4 h-4" />
                                 Add Vehicle
                             </button>
                           }
@@ -268,7 +268,7 @@ export default function CustomerDetailPage() {
                     ) : (
                         <VehicleTable
                           vehicles={vehicles}
-                          sjhowCustomer={false}
+                          showCustomer={false}
                           onDelete={setDeleteVehicleTarget}
                         />
                     )}

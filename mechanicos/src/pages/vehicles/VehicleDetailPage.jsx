@@ -125,7 +125,7 @@ export default function VehicleDetailPage() {
                     </button>
                     <button
                       onClick={() => navigate(`/vehicles/${id}/edit`)}
-                      className="btn-secondary flexitems-center gap-2"
+                      className="btn-secondary flex items-center gap-2"
                     >
                         <Edit className="w-4 h-4" />
                         Edit
@@ -158,7 +158,7 @@ export default function VehicleDetailPage() {
             </div>
 
             {/* Overview Tab */}
-            {activeTab == 'Overview' && (
+            {activeTab === 'Overview' && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Vehicle Specs */}
                     <div className="card space-y-4">
@@ -235,7 +235,7 @@ export default function VehicleDetailPage() {
             )}
 
             {/* InspectionsTab */}
-            {activeTab === 'Ispections' && (
+            {activeTab === 'Inspections' && (
                 <div className="card">
                     <div className="flex items-center justify-between mb-6">
                         <h2 className="section-title">
@@ -292,7 +292,7 @@ export default function VehicleDetailPage() {
                                                     {inspection.mileage_at_inspection.toLocaleString()} km
                                                 </span>
                                             )}
-                                            {inspection.profiles ** (
+                                            {inspection.profiles && (
                                                 <span className="text-xs text-surface-500">
                                                     by {inspection.profiles.first_name} {inspection.profiles.last_name}
                                                 </span>
@@ -324,7 +324,7 @@ export default function VehicleDetailPage() {
                     <EmptyState
                       icon={ClipboardList}
                       title="No service history yet"
-                      desctiption="Service history will appear here once job cards are completed for this vehicle."
+                      description="Service history will appear here once job cards are completed for this vehicle."
                     />
                 </div>
             )}

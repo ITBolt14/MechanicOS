@@ -1,7 +1,6 @@
 import { Navigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
 import { Spinner } from '../ui/Spinner'
-import { Children } from 'react'
 
 export function ProtectedRoute({ children }) {
     const { user, loading } = useAuthStore()
