@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
     ClipboardList, Users, Car,
-    TrendingUp, Plus, ArrowRight
+    TrendingUp, Plus, ArrowRight, LayoutGrid
 } from 'lucide-react'
 import { useAuthStore } from '../../stores/authStore'
 import { useCustomers } from '../../hooks/useCustomers'
@@ -51,9 +51,10 @@ export default function DashboardPage() {
     ]
 
     const quickActions = [
+        { label: 'New Job Card', icon: ClipboardList, to: '/jobs/new', color: 'text-brand-400' },
+        { label: 'Workshop Board', icon: LayoutGrid, to: '/workshop', color: 'text-purple-400' },
         { label: 'New Customer', icon: Users, to: '/customers/new', color: 'text-emerald-400' },
         { label: 'Add Vehicle', icon: Car, to: '/vehicles/new', color: 'text-amber-400' },
-        { label: 'New Job Card', icon: ClipboardList, to: '/jobs/new', color: 'text-brand-400' },
     ]
 
     return (

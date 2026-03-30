@@ -3,7 +3,7 @@ import {
     Wrench, LayoutDashboard, ClipboardList,
     Users, Car, Package, FileText,
     Calendar, BarChart3, Settings,
-    LogOut, ChevronDown, ChevronRight
+    LogOut, ChevronDown, ChevronRight, LayoutGrid
 } from 'lucide-react'
 import { useState } from 'react'
 import { useAuthStore } from '../../stores/authStore'
@@ -19,6 +19,7 @@ const navItems = [
         icon: Wrench,
         children: [
           { to: '/jobs', icon: ClipboardList, label: 'Job Cards' },
+          { to: '/workshop', icon: LayoutGrid, label: 'Workshop Board' },
           { to: '/schedule', icon: Calendar, label: 'Schedule' },
         ],
     },
