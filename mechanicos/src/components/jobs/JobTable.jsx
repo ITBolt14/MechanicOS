@@ -7,13 +7,13 @@ export function JobTable({ jobs, onDelete }) {
 
     const getCustomerName = (customer) => {
         if (!customer) return '-'
-        if (customer.customer_type === 'companny') return customer.company_name
+        if (customer.customer_type === 'company') return customer.company_name
         return `${customer.first_name || ''} ${customer.last_name || ''}`.trim()
     }
 
     const formatDate = (dateStr) => {
         if (!dateStr) return '-'
-        return new Date(dateStr).toLocaleDateString('en.ZA', {
+        return new Date(dateStr).toLocaleDateString('en-ZA', {
             day: '2-digit',
             month: 'short',
             year: 'numeric',
@@ -35,10 +35,10 @@ export function JobTable({ jobs, onDelete }) {
                         <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3 pr-4">Type</th>
                         <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3 pr-4">Status</th>
                         <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3 pr-4">Priority</th>
-                        <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3 pr-4">Assigned To</th>"
+                        <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3 pr-4">Assigned To</th>
                         <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3 pr-4">Total</th>
                         <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3 pr-4">Date</th>
-                        <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3">Actions</th>"
+                        <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-surface-800">
@@ -123,7 +123,7 @@ export function JobTable({ jobs, onDelete }) {
                                       }}
                                       className="p-2 rounded-lg text-surface-500 hover:text-red-400 hover:bg-surface-800 transition-all opacity-0 group-hover:opacity-100"
                                     >
-                                        <Trash2 classname="w-4 h-4" />
+                                        <Trash2 className="w-4 h-4" />
                                     </button>
                                     <ChevronRight className="w-4 h-4 text-surface-600 group-hover:text-surface-300 transition-colors" />
                                 </div>

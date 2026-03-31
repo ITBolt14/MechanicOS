@@ -95,7 +95,7 @@ export function useJobs(filters = {}) {
               first_name,
               last_name,
               role
-            ),
+            )
         `)
         .eq('id', id)
         .single()
@@ -159,7 +159,7 @@ export function useJobs(filters = {}) {
         return data
     }
 
-    const updateJobStatus = async (id, newStatus, surrentStatus, notes = '') => {
+    const updateJobStatus = async (id, newStatus, currentStatus, notes = '') => {
         const { data, error } = await supabase
           .from('job_cards')
           .update({ status: newStatus })
@@ -220,7 +220,7 @@ export function useJobs(filters = {}) {
               make,
               model,
               year,
-              registration)number
+              registration_number
             )
           `)
           .eq('company_id', company.id)

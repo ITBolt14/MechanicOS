@@ -26,7 +26,7 @@ export function useJobTimer(jobId) {
           .order('clocked_in', { ascending: false })
 
         if (!error) {
-            etTimeLogs(data || [])
+            setTimeLogs(data || [])
             const active = (data || []).find(
                 (log) => log.technician_id === profile?.id && !log.clocked_out
             )
@@ -97,7 +97,7 @@ export function useJobTimer(jobId) {
     }
 
     const formatDuration = (minutes) => {
-        const h = Math.floot(minutes / 60)
+        const h = Math.floor(minutes / 60)
         const m = minutes % 60
         if (h === 0) return `${m}m`
         return `${h}h ${m}m`

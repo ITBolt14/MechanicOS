@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import {useNavigate } from 'react-router-dpm'
+import {useNavigate } from 'react-router-dom'
 import {
     LayoutGrid, Plus, RefreshCw,
     User, Car, AlertTriangle, Star, Shield
 } from 'lucide-react'
 import { useJobs } from '../../hooks/useJobs'
 import { JOB_STATUSES, JobPriorityBadge } from '../../components/jobs/JobStatusBadge'
-import { Spinner } from '../..components/ui/Spinner'
+import { Spinner } from '../../components/ui/Spinner'
 
 const BOARD_COLUMNS = [
     'intake',
@@ -100,7 +100,7 @@ function JobBoardCard({ job, onStatusChange, navigate }) {
             {/* Vehicle */}
             {job.vehicles && (
                 <div className="flex items-center gap-2 mb-3">
-                    <div className="w-6 h-6 bg-emerald-500 bg-opacity-10 rounded-lg flex items-center jusitfy-center flex-shrink-0">
+                    <div className="w-6 h-6 bg-emerald-500 bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Car className="w-3 h-3 text-emerald-400" />
                     </div>
                     <div className="min-w-0">
@@ -176,8 +176,8 @@ export default function WorkshopBoardPage() {
         setTechs(uniqueTechs)
     }, [jobs])
 
-    const handleStatusChange = async (JobDetailPage, newStatus, currentStatus) => {
-        await updateJobStatus(JobDetailPage, newStatus, currentStatus)
+    const handleStatusChange = async (jobId, newStatus, currentStatus) => {
+        await updateJobStatus(jobId, newStatus, currentStatus)
     }
 
     const handleDragOver = (e) => {
@@ -186,7 +186,7 @@ export default function WorkshopBoardPage() {
 
     const handleDrop = async (e, status) => {
         e.preventDefault()
-        if (!draggingJob || draggingJob,status === status) return
+        if (!draggingJob || draggingJob.status === status) return
         await handleStatusChange(draggingJob.id, status, draggingJob.status)
         setDraggingJob(null)
     }
@@ -214,7 +214,7 @@ export default function WorkshopBoardPage() {
             <div className="flex items-center justify-between flex-wrap gap-4">
                 <div>
                     <h1 className="page-title">Workshop Board</h1>
-                    <p className="text=surface-400 mt-1">
+                    <p className="text-surface-400 mt-1">
                         {activeJobs.length} active job{activeJobs.length !== 1 ? 's' : ''} in workshop
                     </p>
                 </div>
@@ -256,7 +256,7 @@ export default function WorkshopBoardPage() {
                 <span className="text-xs text-surface-500">Priority:</span>
                 <div className="flex items-center gap-1.5">
                     <div className="w-3 h-3 rounded-sm bg-amber-500" />
-                    <span className="text-xw text-surface-400">Urgent</span>
+                    <span className="text-xs text-surface-400">Urgent</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                     <div className="w-3 h-3 rounded-sm bg-purple-500" />

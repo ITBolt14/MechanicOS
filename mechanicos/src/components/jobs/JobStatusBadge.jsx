@@ -5,7 +5,7 @@ export const JOB_STATUSES = {
   diagnosis:        { label: 'Diagnosis',       variant: 'warning',     order: 2 },
   awaiting_parts:   { label: 'Awaiting Parts',  variant: 'danger',      order: 3 },
   in_progress:      { label: 'In Progress',     variant: 'primary',     order: 4 },
-  quality_check:    { label: 'Quality_Check',   variant: 'purple',      order: 5 },
+  quality_check:    { label: 'Quality Check',   variant: 'purple',      order: 5 },
   complete:         { label: 'Complete',        variant: 'success',     order: 6 },
   invoiced:         { label: 'Invoiced',        variant: 'default',     order: 7 },
 }
@@ -17,7 +17,7 @@ export const JOB_TYPES = {
     electrical:     { label: 'Electrical' },
     tyres:          { label: 'Tyres' },
     diagnostics:    { label: 'Diagnostics' },
-    other:          { llabel: 'Other' },
+    other:          { label: 'Other' },
 }
 
 export const JOB_PRIORITIES = {
@@ -41,7 +41,7 @@ export function JobPriorityBadge({ priority, size = 'md' }) {
         urgent: 'warning',
         vip: 'purple',
     }
-    const config = JOBPRIORITIES[priority] || JOB_PRIORITIES.normal
+    const config = JOB_PRIORITIES[priority] || JOB_PRIORITIES.normal
     return (
         <Badge variant={map[priority] || 'default'} size={size}>
             {config.label}

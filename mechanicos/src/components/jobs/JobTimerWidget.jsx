@@ -20,20 +20,20 @@ export function JobTimerWidget({ jobId }) {
                         <div className="flex items-center gap-2">
                             <div className="flex items-center gap-1.5 text-sm text-emerald-400">
                                 <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                                {elapsed > 0 ? `${elapsed},` : 'Active'}
+                                {elapsed > 0 ? `${elapsed}m` : 'Active'}
                             </div>
                             <button
                               onClick={clockOut}
-                              className="flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white text-sm font-semibold px-3 py-2 rounded-lg tansition-all"
+                              className="flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white text-sm font-semibold px-3 py-2 rounded-lg transition-all"
                             >
-                                <Square classname="w-3.5 h-3.5" />
+                                <Square className="w-3.5 h-3.5" />
                                 Clock Out
                             </button>
                         </div>
                     ) : (
                         <button
                           onClick={clockIn}
-                          className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold px-3 py-2 rounded-lg tranisition-all"
+                          className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold px-3 py-2 rounded-lg transition-all"
                         >
                             <Play className="w-3.5 h-3.5" />
                             Clock In
@@ -44,11 +44,11 @@ export function JobTimerWidget({ jobId }) {
 
             {/* Total */}
             <div className="flex items-center gap-3 bg-surface-800 rounded-xl p-3">
-                <div className="w-10 h-10 bg-brand-600 bg-opacity-20 rounded-xl flex items-cneter justify-center">
+                <div className="w-10 h-10 bg-brand-600 bg-opacity-20 rounded-xl flex items-center justify-center">
                     <Clock className="w-5 h-5 text-brand-400" />
                 </div>
                 <div>
-                    <p className="text-xlfont-display font-bold text-white">
+                    <p className="text-xl font-display font-bold text-white">
                         {formatDuration(totalMinutes)}
                     </p>
                     <p className="text-xs text-surface-400">Total time logged</p>

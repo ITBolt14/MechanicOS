@@ -47,7 +47,7 @@ export function JobNotes({ jobId }) {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 />
-                <div className="flez items-center justify-between">
+                <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <button
                           onClick={() => setIsInternal(true)}
@@ -98,18 +98,18 @@ export function JobNotes({ jobId }) {
                           className={`rounded-xl p-4 border group ${
                             note.is_internal
                               ? 'bg-surface-800 border-surface-700'
-                              : 'bg-brand-600 bg-opacity-5 border-brnad-600 border-opacity-20'
+                              : 'bg-brand-600 bg-opacity-5 border-brand-600 border-opacity-20'
                           }`}
                         >
-                            <div className="flec items-center jusitfy-between mb-2">
-                                <div className="flex items-ccenter gap-2">
+                            <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-2">
                                     {note.is_internal ? (
                                         <div className="flex items-center gap-1 text-xs text-surface-500">
                                             <Lock className="w-3 h-3" />
                                             Internal
                                         </div>
                                     ) : (
-                                        <div className="felx items-center gap-1 text-xs text-brand-400">
+                                        <div className="flex items-center gap-1 text-xs text-brand-400">
                                             <Globe className="w-3 h-3" />
                                             Customer Visible
                                         </div>
@@ -131,7 +131,7 @@ export function JobNotes({ jobId }) {
                                       onClick={() => deleteNote(note.id)}
                                       className="p-1 rounded text-surface-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all"
                                     >
-                                        <Trash2 clasNname="w-3.5 h-3.5" />
+                                        <Trash2 className="w-3.5 h-3.5" />
                                     </button>
                                 )}
                               </div>

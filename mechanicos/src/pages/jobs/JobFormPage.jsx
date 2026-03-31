@@ -62,11 +62,11 @@ export default function JobFormPage() {
     // Fetch profiles for technician assignment
     useEffect(() => {
         const fetchProfiles = async () => {
-            const { supabase } = await import('.../.../lib/supabase')
+            const { supabase } = await import('../../lib/supabase')
             const { data } = await supabase
               .from('profiles')
               .select('id, first_name, last_name, role')
-              .ew('company_id', profile?.company_id)
+              .eq('company_id', profile?.company_id)
               .eq('is_active', true)
             setProfiles(data || [])
         }
@@ -100,7 +100,7 @@ export default function JobFormPage() {
                         customer_id: job.customer_id || '',
                         vehicle_id: job.vehicle_id || '',
                         assigned_to: job.assigned_to || '',
-                        tob_type: job.job_type || 'service',
+                        job_type: job.job_type || 'service',
                         priority: job.priority || 'normal',
                         description: job.description || '',
                         mileage_in: job.mileage_in || '',
@@ -153,7 +153,7 @@ export default function JobFormPage() {
           : await createJob(payload)
 
         setLoading(false)
-        if (result) navigate(isEditing ? `/jobs/${id}` : `/jobs/#{result.id}`)
+        if (result) navigate(isEditing ? `/jobs/${id}` : `/jobs/${result.id}`)
     }
 
     const getCustomerLabel = (customer) => {
@@ -186,7 +186,7 @@ export default function JobFormPage() {
                 </div>
             </div>
 
-            <form onSumbit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
 
                 {/* Customer & Vehicle */}
                 <div className="card space-y-4">
@@ -265,7 +265,7 @@ export default function JobFormPage() {
                           onChange={(e) => update('assigned_to', e.target.value)}
                           options={profiles.map((p) => ({
                             value: p.id,
-                            label: `${p.first_name} ${p.last_name} (#{p.role})`,
+                            label: `${p.first_name} ${p.last_name} (${p.role})`,
                           }))}
                         />
                         <Input
@@ -293,10 +293,10 @@ export default function JobFormPage() {
                             }`}
                         >
                             <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0
-                              #{form.is_insurance ? 'border-blue-500 bg-blue-500' : 'border-surface-600'}`}>
+                              ${form.is_insurance ? 'border-blue-500 bg-blue-500' : 'border-surface-600'}`}>
                                 {form.is_insurance && (
                                     <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 1314 4L19 7" /> 
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /> 
                                     </svg>
                                 )}
                               </div>
@@ -340,7 +340,7 @@ export default function JobFormPage() {
                               ${form.is_warranty ? 'border-purple-500 bg-purple-500' : 'border-surface-600'}`}>
                                 {form.is_warranty && (
                                     <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 1314 4L19 7" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                     </svg>
                                 )}
                               </div>

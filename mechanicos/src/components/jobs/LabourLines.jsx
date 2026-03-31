@@ -3,7 +3,7 @@ import { Plus, Trash2, Edit2, Check, X } from 'lucide-react'
 import { useJobLines } from '../../hooks/useJobLines'
 import { Spinner } from '../ui/Spinner'
 
-export function LabourLines({ jobId, canEdit = true }) {
+export function LabourLines({ jobId, canEdit = true, onTotalsChange }) {
     const { labourLines, fetchLabour, addLabour, updateLabour, deleteLabour } = useJobLines(jobId)
     const [adding, setAdding] = useState(false)
     const [editingId, setEditingId] = useState(null)
@@ -24,6 +24,7 @@ export function LabourLines({ jobId, canEdit = true }) {
         setForm({ description: '', hours: '', rate: '' })
         setAdding(false)
         setSaving(false)
+        if (onTotalsChange) await onTotalsChange()
     }
 
     const handleEdit = async (id) => {
@@ -35,6 +36,7 @@ export function LabourLines({ jobId, canEdit = true }) {
         })
         setEditingId(null)
         setSaving(false)
+        if (onTotalsChange) await onTotalsChange()
     }
 
     const startEdit = (line) => {
@@ -49,7 +51,7 @@ export function LabourLines({ jobId, canEdit = true }) {
     const formatAmount = (amount) =>
         `R ${parseFloat(amount || 0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
 
-    const labourTotal = labourLines.reduce((sum, l) => sum + (labourLines.total || 0), 0)
+    const labourTotal = labourLines.reduce((sum, l) => sum + (l.total || 0), 0)
 
     return (
         <div className="space-y-4">
@@ -76,7 +78,7 @@ export function LabourLines({ jobId, canEdit = true }) {
                               className="input-field"
                               placeholder="e.g. Engine oil service"
                               value={form.description}
-                              onChange={(e) => setForm({ ...form, desctiption: e.target.value })}
+                              onChange={(e) => setForm({ ...form, description: e.target.value })}
                             />
                         </div>
                         <div>
@@ -107,7 +109,7 @@ export function LabourLines({ jobId, canEdit = true }) {
                         </button>
                         <button
                           onClick={handleAdd}
-                          disabled={saving || form.description || !form.hours || !form.rate}
+                          disabled={saving || !form.description || !form.hours || !form.rate}
                           className="btn-primary flex-1 text-sm py-2 flex items-center justify-center gap-2"
                         >
                             {saving ? <Spinner size="sm" /> : null}
@@ -178,7 +180,7 @@ export function LabourLines({ jobId, canEdit = true }) {
                                                   onClick={() => setEditingId(null)}
                                                   className="p-1.5 rounded-lg text-surface-400 hover:bg-surface-700"
                                                 >
-                                                    <X className="2-4 h-4" />
+                                                    <X className="w-4 h-4" />
                                                 </button>
                                             </div>
                                           </td>
@@ -187,7 +189,7 @@ export function LabourLines({ jobId, canEdit = true }) {
                                         <>
                                           <td className="py-3 pr-4">
                                             <div>
-                                                <p classname="text-sm text-white">{line.description}</p>
+                                                <p className="text-sm text-white">{line.description}</p>
                                                 {line.profiles && (
                                                     <p className="text-xs text-surface-500">
                                                         {line.profiles.first_name} {line.profiles.last_name}
@@ -209,12 +211,16 @@ export function LabourLines({ jobId, canEdit = true }) {
                                                 <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-all">
                                                     <button
                                                       onClick={() => startEdit(line)}
-                                                      className="p.1.5 rounded-lg text-surface-400 hover:text-brand-400 hover:bg-surface-700"
+                                                      className="p-1.5 rounded-lg text-surface-400 hover:text-brand-400 hover:bg-surface-700"
                                                     >
                                                         <Edit2 className="w-3.5 h-3.5" />
                                                     </button>
                                                     <button
-                                                      onClick={() => deleteLabour(line.id)}
+                                                      onClick={async (e) => {
+                                                        e.stopPropagation()
+                                                        await deleteLabour(line.id)
+                                                        if (onTotalsChange) await onTotalsChange()
+                                                      }}
                                                       className="p-1.5 rounded-lg text-surface-400 hover:text-red-400 hover:bg-surface-700"
                                                     >
                                                         <Trash2 className="w-3.5 h-3.5" />
@@ -232,7 +238,7 @@ export function LabourLines({ jobId, canEdit = true }) {
                               <td colSpan={canEdit ? 3 : 3} className="pt-3 text-sm font-semibold text-surface-400">
                                 Labour Total
                               </td>
-                              <td className="pt-r text-right text-sm font-bold text-white">
+                              <td className="pt-3 text-right text-sm font-bold text-white">
                                 {formatAmount(labourTotal)}
                               </td>
                               {canEdit && <td />}

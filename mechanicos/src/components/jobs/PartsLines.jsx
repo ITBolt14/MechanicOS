@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Plus, Trash2, Edit2, Check, X } from 'lucide-react'
 import { useJobLines } from '../../hooks/useJobLines'
 import { Spinner } from '../ui/Spinner'
 
-export function PartsLines({ jobId, canEdit = true }) {
+export function PartsLines({ jobId, canEdit = true, onTotalsChange }) {
     const { partsLines, fetchParts, addPart, updatePart, deletePart } = useJobLines(jobId)
     const [adding, setAdding] = useState(false)
     const [editingId, setEditingId] = useState(null)
@@ -14,7 +14,7 @@ export function PartsLines({ jobId, canEdit = true }) {
     const [editForm, setEditForm] = useState({})
     const [saving, setSaving] = useState(false)
 
-    useState(() => { fetchParts() }, [jobId])
+    useEffect(() => { fetchParts() }, [jobId])
 
     const handleAdd = async () => {
         if (!form.description || !form.unit_price) return
@@ -29,6 +29,7 @@ export function PartsLines({ jobId, canEdit = true }) {
         setForm({ part_number: '', description: '', quantity: '1', unit_price: '', supplier: '' })
         setAdding(false)
         setSaving(false)
+        if (onTotalsChange) await onTotalsChange()
     }
 
     const handleEdit = async (id) => {
@@ -42,6 +43,7 @@ export function PartsLines({ jobId, canEdit = true }) {
         })
         setEditingId(null)
         setSaving(false)
+        if (onTotalsChange) await onTotalsChange()
     }
 
     const startEdit = (line) => {
@@ -105,7 +107,7 @@ export function PartsLines({ jobId, canEdit = true }) {
                               min="1"
                               step="1"
                               value={form.quantity}
-                              onChange={(e) => setForm({ ...Form, quantity: e.target.value })}
+                              onChange={(e) => setForm({ ...form, quantity: e.target.value })}
                             />
                         </div>
                         <div>
@@ -115,7 +117,7 @@ export function PartsLines({ jobId, canEdit = true }) {
                               type="number"
                               placeholder="0.00"
                               value={form.unit_price}
-                              onChange={(e) => setForm({ ...form, unit_price: e.target.calue })}
+                              onChange={(e) => setForm({ ...form, unit_price: e.target.value })}
                             />
                         </div>
                         <div>
@@ -249,12 +251,16 @@ export function PartsLines({ jobId, canEdit = true }) {
                                               <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-all">
                                                 <button
                                                   onClick={() => startEdit(line)}
-                                                  className="p-1.5 rounded-lg text-surface-400 hover:text-brand-400 hover:g-surface-700"
+                                                  className="p-1.5 rounded-lg text-surface-400 hover:text-brand-400 hover:bg-surface-700"
                                                 >
                                                   <Edit2 className="w-3.5 h-3.5" />
                                                 </button>
                                                 <button
-                                                  onClick={() => deletePart(line.id)}
+                                                  onClick={async (e) => {
+                                                    e.stopPropagation()
+                                                    await deletePart(line.id)
+                                                    if (onTotalsChange) await onTotalsChange()
+                                                  }}
                                                   className="p-1.5 rounded-lg text-surface-400 hover:text-red-400 hover:bg-surface-700"
                                                 >
                                                   <Trash2 className="w-3.5 h-3.5" />

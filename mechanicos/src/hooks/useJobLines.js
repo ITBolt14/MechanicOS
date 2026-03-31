@@ -89,15 +89,17 @@ export function useJobLines(jobId) {
 
     // Labour
     const addLabour = async (labourData) => {
+        const { total, ...safeLabourData } = labourData
         const { data, error } = await supabase
           .from('job_labour')
           .insert({
-            ...labourData,
+            ...safeLabourData,
             job_id: jobId,
             company_id: company.id,
+            technician_id: profile?.id || null,
           })
-          .select()
-          .single()
+          //.select()
+          //.single()
 
         if (error) {
             toast.error('Failed to add labour line')
@@ -144,15 +146,16 @@ export function useJobLines(jobId) {
 
     // Parts
     const addPart = async (partData) => {
+        const { total, ...safePartData } = partData
         const { data, error } = await supabase
           .from('job_parts')
           .insert({
-            ...partData,
+            ...safePartData,
             job_id: jobId,
             company_id: company.id,
           })
-          .select()
-          .single()
+          //.select()
+          //.single()
 
         if (error) {
             toast.error('Failed to add part')
@@ -173,7 +176,7 @@ export function useJobLines(jobId) {
           .single()
 
         if (error) {
-            toast-error('Failed to update part')
+            toast.error('Failed to update part')
             return null
         }
         await fetchParts()
@@ -198,7 +201,7 @@ export function useJobLines(jobId) {
     }
 
     // Notes
-    const addNote = async (ContentVisibilityAutoStateChangeEvent, isInternal = true) => {
+    const addNote = async (content, isInternal = true) => {
         const { data, error } = await supabase
           .from('job_notes')
           .insert({
@@ -206,7 +209,7 @@ export function useJobLines(jobId) {
             company_id: company.id,
             author_id: profile.id,
             content,
-            is_internal: inInternal,
+            is_internal: isInternal,
           })
           .select()
           .single()
@@ -230,7 +233,7 @@ export function useJobLines(jobId) {
             toast.error('Failed to delete note')
             return false
         }
-        await ffetchNotes()
+        await fetchNotes()
         return true
     }
 

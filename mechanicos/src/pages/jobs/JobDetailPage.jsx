@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
     ArrowLeft, Edit, Trash2, Car, User,
-    Calender, Gauge, AlertTriangle,
+    Calendar, Gauge, AlertTriangle,
     Shield, Star, ClipboardList
 } from 'lucide-react'
 import { useJobs } from '../../hooks/useJobs'
@@ -25,6 +25,9 @@ export default function JobDetailPage() {
     const { id } = useParams()
     const { getJob, updateJobStatus, deleteJob } = useJobs()
     const { statusHistory, fetchStatusHistory } = useJobLines(id)
+    const [labourTotal, setLabourTotal] = useState(0)
+    const [partsTotal, setPartsTotal] = useState(0)
+    const [totalAmount, setTotalAmount] = useState(0)
 
     const [job, setJob] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -41,7 +44,21 @@ export default function JobDetailPage() {
     const loadJob = async () => {
         const data = await getJob(id)
         setJob(data)
+        if (data) {
+            setLabourTotal(data.labour_total || 0)
+            setPartsTotal(data.parts_total || 0)
+            setTotalAmount(data.total_amount || 0)
+        }
         setLoading(false)
+    }
+
+    const refreshTotals = async () => {
+        const data = await getJob(id)
+        if (data) {
+            setLabourTotal(data.labour_total || 0)
+            setPartsTotal(data.parts_total || 0)
+            setTotalAmount(data.total_amount || 0)
+        }
     }
 
     const handleStageChange = async (newStatus) => {
@@ -171,13 +188,13 @@ export default function JobDetailPage() {
             {/* Totals Summary */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
-                    { label: 'Labour Total', value: formatAmount(job.labour_total), color: 'text-brand-400' },
-                    { label: 'Parts Total', value: formatAmount(job.parts_total), color: 'text-amber-400' },
-                    { label: 'Total Amount', value: formatAmount(job.total_amount), color: 'text-emerald-400' },
+                    { label: 'Labour Total', value: formatAmount(labourTotal), color: 'text-brand-400' },
+                    { label: 'Parts Total', value: formatAmount(partsTotal), color: 'text-amber-400' },
+                    { label: 'Total Amount', value: formatAmount(totalAmount), color: 'text-emerald-400' },
                 ].map((stat) => (
                     <div key={stat.label} className="card flex items-center gap-4">
                         <div>
-                            <p classname={`text-2xl font-display font-bold ${stat.color}`}>
+                            <p className={`text-2xl font-display font-bold ${stat.color}`}>
                                 {stat.value}
                             </p>
                             <p className="text-surface-400 text-sm">{stat.label}</p>
@@ -299,7 +316,7 @@ export default function JobDetailPage() {
                                               : '-'
                                             }
                                         </p>
-                                        <p className="text-xsfont-mono text-surface-400">
+                                        <p className="text-xs font-mono text-surface-400">
                                             {job.vehicles?.registration_number || 'No plate'}
                                         </p>
                                     </div>
@@ -357,7 +374,7 @@ export default function JobDetailPage() {
                                     <p className="text-sm text-surface-500">Unassigned</p>
                                     <button
                                       onClick={() => navigate(`/jobs/${id}/edit`)}
-                                      className="text-xs text.brand-400 hover:text-brand-300 mt-1"
+                                      className="text-xs text-brand-400 hover:text-brand-300 mt-1"
                                     >
                                         Assign a technician
                                     </button>
@@ -374,14 +391,14 @@ export default function JobDetailPage() {
             {/* Labour Tab */}
             {activeTab === 'Labour' && (
                 <div className="card">
-                    <LabourLines jobId={id} canEdit={job.status !== 'invoiced'} />
+                    <LabourLines jobId={id} canEdit={job.status !== 'invoiced'} onTotalsChange={refreshTotals} />
                 </div>
             )}
 
             {/* Parts Tab */}
             {activeTab === 'Parts' && (
                 <div className="card">
-                    <PartsLines jobId={id} canEdit={job.status !== 'invoiced'} />
+                    <PartsLines jobId={id} canEdit={job.status !== 'invoiced'} onTotalsChange={refreshTotals} />
                 </div>
             )}
 

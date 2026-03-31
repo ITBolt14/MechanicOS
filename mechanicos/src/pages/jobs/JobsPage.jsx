@@ -22,7 +22,7 @@ const STATUS_FILTERS = [
 export default function JobsPage() {
     const navigate = useNavigate()
     const [statusFilter, setStatusFilter] = useState('')
-    const { jobs, loading, fetchJobs, deleteJob, searchJob } = useJobs(
+    const { jobs, loading, fetchJobs, deleteJob, searchJobs } = useJobs(
         statusFilter ? { status: statusFilter } : {}
     )
     const [search, setSearch] = useState('')
@@ -72,7 +72,7 @@ export default function JobsPage() {
                 <div className="flex items-center gap-3">
                     <button
                       onClick={fetchJobs}
-                      className="bt-ghost p-2.5"
+                      className="btn-ghost p-2.5"
                       title="Refresh"
                     >
                         <RefreshCw className="w-4 h-4" />
@@ -141,7 +141,7 @@ export default function JobsPage() {
             {/* Table */}
             <div className="card p-0 overflow-hidden">
                 {loading ? (
-                    <div className="flex items-center jjustify-center py-16">
+                    <div className="flex items-center justify-center py-16">
                         <Spinner size="lg" />
                     </div>
                 ) : displayedJobs.length === 0 ? (
