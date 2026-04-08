@@ -6,7 +6,7 @@ import { useEstimateSettings } from '../../hooks/useEstimateSettings'
 import { useCustomers } from '../../hooks/useCustomers'
 import { Input } from '../../components/ui/Input'
 import { Select } from '../../components/ui/Select'
-import { Textarea, TextArea } from '../../components/ui/TextArea'
+import { Textarea } from '../../components/ui/Textarea'
 import { Spinner } from '../../components/ui/Spinner'
 
 const JOB_TYPE_OPTIONS = [
@@ -49,7 +49,7 @@ export default function EstimateFormPage() {
     })
 
     // Set valid_until default 30 days from now
-    seEffect(() => {
+    useEffect(() => {
         if (settings && !form.valid_until) {
             const date = new Date()
             date.setDate(date.getDate() + (settings.quote_validity_days || 30))
@@ -106,7 +106,7 @@ export default function EstimateFormPage() {
                         job_type: estimate.job_type || 'service',
                         description: estimate.description || '',
                         payment_terms: estimate.payment_terms || '30 days',
-                        valid_until: estimate.valid_until | '',
+                        valid_until: estimate.valid_until || '',
                         vat_rate: estimate.vat_rate?.toString() || '15',
                         notes: estimate.notes || '',
                         internal_notes: estimate.internal_notes || '',
@@ -172,10 +172,10 @@ export default function EstimateFormPage() {
                 </button>
                 <div>
                     <h1 className="page-title">
-                        {idEditing ? 'Edit Estimate' : 'New Estimate'}
+                        {isEditing ? 'Edit Estimate' : 'New Estimate'}
                     </h1>
                     <p className="text-surface-400 mt-1">
-                        {isEditing ? 'Uppdate estimate details' : 'Create a professional quote'}
+                        {isEditing ? 'Update estimate details' : 'Create a professional quote'}
                     </p>
                 </div>
             </div>
@@ -240,7 +240,7 @@ export default function EstimateFormPage() {
                       onChange={(e) => update('job_type', e.target.value)}
                       options={JOB_TYPE_OPTIONS}
                     />
-                    <TextArea
+                    <Textarea
                       label="Description"
                       placeholder="Describe the work to be quoted..."
                       rows={3}

@@ -60,7 +60,7 @@ export function useEstimateSettings() {
             diagnostics:        settings.rate_diagnostics,
             other:              settings.rate_other,
         }
-        return rateMMap[jobType] || settings.default_labour_rate || 450
+        return rateMap[jobType] || settings.default_labour_rate || 450
     }
 
     useEffect(() => {

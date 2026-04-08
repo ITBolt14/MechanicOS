@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
     ClipboardList, Users, Car,
-    TrendingUp, Plus, ArrowRight, LayoutGrid
+    TrendingUp, Plus, ArrowRight,
+    LayoutGrid, Calculator
 } from 'lucide-react'
 import { useAuthStore } from '../../stores/authStore'
 import { useCustomers } from '../../hooks/useCustomers'
 import { useVehicles } from '../../hooks/useVehicles'
+import { useEstimates } from '../../hooks/useEstimates'
 import { Spinner } from '../../components/ui/Spinner'
 
 export default function DashboardPage() {
@@ -14,6 +16,7 @@ export default function DashboardPage() {
     const { profile, company } = useAuthStore()
     const { customers, loading: customersLoading } = useCustomers()
     const { vehicles, loading: vehiclesLoading } = useVehicles()
+    const { estimates, loading: estimatesLoading } = useEstimates()
 
     const stats = [
         { 
@@ -40,6 +43,14 @@ export default function DashboardPage() {
             bg: 'bg-amber-500 bg-opacity-10',
             to: '/vehicles',
         },
+        {
+            label: 'Estimates',
+            value: estimatesLoading ? '...' : estimates.length,
+            icon: LayoutGrid,
+            color: 'text-purple-400',
+            bg: 'bg-purple-500 bg-opacity-10',
+            to: '/estimates',
+        },
         { 
             label: 'Revenue (Month)',
             value: 'R 0',
@@ -52,6 +63,7 @@ export default function DashboardPage() {
 
     const quickActions = [
         { label: 'New Job Card', icon: ClipboardList, to: '/jobs/new', color: 'text-brand-400' },
+        { label: 'New Estimate', icon: Calculator, to: '/estimates/new', color: 'text-purple-400' },
         { label: 'Workshop Board', icon: LayoutGrid, to: '/workshop', color: 'text-purple-400' },
         { label: 'New Customer', icon: Users, to: '/customers/new', color: 'text-emerald-400' },
         { label: 'Add Vehicle', icon: Car, to: '/vehicles/new', color: 'text-amber-400' },
@@ -82,7 +94,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
                 {stats.map((stat) => (
                     <button
                       key={stat.label}
@@ -105,7 +117,7 @@ export default function DashboardPage() {
             {/* Quick Actions */}
             <div className="card space-y-4">
                 <h2 className="section-title">Quick Actions</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                     {quickActions.map((action) => (
                         <button
                           key={action.label}

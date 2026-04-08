@@ -131,7 +131,7 @@ export function SubletLines({ estimateId, canEdit = true, onTotalsChange }) {
                                 <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Cost</th>
                                 <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Markup</th>
                                 <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Total</th>
-                                {canEdit && <tr className="pb-2 w-10" />}
+                                {canEdit && <th className="pb-2 w-10" />}
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-surface-800">
@@ -141,7 +141,7 @@ export function SubletLines({ estimateId, canEdit = true, onTotalsChange }) {
                                         <p className="text-sm text-white">{line.description}</p>
                                     </td>
                                     <td className="py-3 pr-4">
-                                        <span className="text-sm text-surface-400">{line.supplier || '-'}</span>
+                                        <span className="text-sm text-surface-300">{line.supplier || '-'}</span>
                                     </td>
                                     <td className="py-3 pr-4 text-right text-sm text-surface-300">
                                         {formatAmount(line.cost)}
@@ -160,7 +160,7 @@ export function SubletLines({ estimateId, canEdit = true, onTotalsChange }) {
                                                 await deleteSublet(line.id)
                                                 if (onTotalsChange) await onTotalsChange()
                                               }}
-                                            className="p-1.5 rounded-lg text-surface-500 hover:text-red-400 hover:bg-surface-700 opacity-0 group-hover:opcaity-100 transition-all"
+                                            className="p-1.5 rounded-lg text-surface-500 hover:text-red-400 hover:bg-surface-700 opacity-0 group-hover:opacity-100 transition-all"
                                         >
                                             <Trash2 className="w-3.5 h-3.5" />
                                         </button>

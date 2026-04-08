@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import { useAuthStore } from '../stores/authStore'
 import toast from 'react-hot-toast'
 
-export function useEstimates(filters = []) {
+export function useEstimates(filters = {}) {
     const { company, profile } = useAuthStore()
     const [estimates, setEstimates] = useState([])
     const [loading, setLoading] = useState(true)
@@ -34,7 +34,7 @@ export function useEstimates(filters = []) {
             ),
             job_cards (
               id,
-              job_number,
+              job_number
             ),
             profiles (
               id,
@@ -220,7 +220,7 @@ export function useEstimates(filters = []) {
           .eq('id', id)
 
         if (error) {
-            toast.error('Failed to declare estimate')
+            toast.error('Failed to delete estimate')
             return false
         }
         toast.success('Estimate removed')

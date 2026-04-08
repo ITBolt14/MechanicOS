@@ -28,6 +28,12 @@ import JobDetailPage from './pages/jobs/JobDetailPage'
 import JobFormPage from './pages/jobs/JobFormPage'
 import WorkshopBoardPage from './pages/jobs/WorkshopBoardPage'
 
+// Estimate Pages
+import EstimatesPage from './pages/estimates/EstimatesPage'
+import EstimateDetailPage from './pages/estimates/EstimateDetailPage'
+import EstimateFormPage from './pages/estimates/EstimateFormPage'
+import EstimatePDFPage from './pages/estimates/EstimatePDFPage'
+
 function App() {
   useAuth() // Initialise auth state
 
@@ -83,6 +89,13 @@ function App() {
           <Route path="jobs/:id" element={<JobDetailPage />} />
           <Route path="jobs/:id/edit" element={<JobFormPage />} />
           <Route path="workshop" element={<WorkshopBoardPage />} />
+
+          {/* Estimates */}
+          <Route path="estimates" element={<EstimatesPage />} />
+          <Route path="estimates/new" element={<EstimateFormPage />} />
+          <Route path="estimates/:id" element={<EstimateDetailPage />} />
+          <Route path="estimates/:id/edit" element={<EstimateFormPage />} />
+          <Route path="estimates/:id/pdf" element={<EstimatePDFPage />} />
         </Route>
 
         {/* Fallback */}

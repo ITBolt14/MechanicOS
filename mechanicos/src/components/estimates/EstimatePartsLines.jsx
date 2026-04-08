@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Plus, Trash2, Edit2, Check, X } from 'lucide-react'
-import { useEstimateLines } from '../../hooks/useStimateLines'
+import { useEstimateLines } from '../../hooks/useEstimateLines'
 import { Spinner } from '../ui/Spinner'
 
 export function EstimatePartsLines({ estimateId, canEdit = true, onTotalsChange }) {
@@ -161,7 +161,7 @@ export function EstimatePartsLines({ estimateId, canEdit = true, onTotalsChange 
                         <div>
                             <label className="label">Supplier</label>
                             <input
-                              className="input_field"
+                              className="input-field"
                               placeholder="Optional"
                               value={form.supplier}
                               onChange={(e) => setForm({ ...form, supplier: e.target.value })}

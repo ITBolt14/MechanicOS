@@ -54,14 +54,14 @@ export default function EstimatesPage() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 classname="page-title">Estimates</h1>
-                    <p classname="text-surface-400 mt-1">
+                    <h1 className="page-title">Estimates</h1>
+                    <p className="text-surface-400 mt-1">
                         {estimates.length} estimate{estimates.length !== 1 ? 's' : ''} total
                     </p>
                 </div>
                 <div className="flex items-center gap-3">
                     <button onClick={fetchEstimates} className="btn-ghost p-2.5" title="Refresh">
-                        <RefreshCw className="w-4 g-4" />
+                        <RefreshCw className="w-4 h-4" />
                     </button>
                     <button 
                       onClick={() => navigate('/estimates/new')}
@@ -96,7 +96,7 @@ export default function EstimatesPage() {
             </div>
 
             {/* Search & Filter */}
-            <div className="flex items-center gap-4 flew-wrap">
+            <div className="flex items-center gap-4 flex-wrap">
                 <div className="relative flex-1 min-w-64">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Search className="w-4 h-4 text-surface-500" />
@@ -123,7 +123,7 @@ export default function EstimatesPage() {
             {/* Table */}
             <div className="card p-0 overflow-hidden">
                 {loading ? (
-                    <div classname="flex items-center justify-center py-16">
+                    <div className="flex items-center justify-center py-16">
                         <Spinner size="lg" />
                     </div>
                 ) : filteredEstimates.length === 0 ? (
@@ -134,7 +134,7 @@ export default function EstimatesPage() {
                         ? `No results for "${search}".`
                         : 'Create your first estimate to get started.'
                       }
-                      action={!search && !searchFilter && (
+                      action={!search && !statusFilter && (
                         <button
                           onClick={() => navigate('/estimates/new')}
                           className="btn-primary flex items-center gap-2"

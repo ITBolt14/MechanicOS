@@ -153,10 +153,10 @@ export function PaintCalculator({ estimateId, canEdit = true, onTotalsChange }) 
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-surface-800">
-                                <th classname="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Panel</th>
+                                <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Panel</th>
                                 <th className="text-left text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Paint Code</th>
                                 <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Materials</th>
-                                <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Labour"</th>
+                                <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Labour</th>
                                 <th className="text-right text-xs font-semibold text-surface-400 uppercase tracking-wider pb-2 pr-4">Total</th>
                                 {canEdit && <th className="pb-2 w-10" />}
                             </tr>

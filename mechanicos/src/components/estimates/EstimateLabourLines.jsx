@@ -164,7 +164,7 @@ export function EstimateLabourLines({ estimateId, defaultRate = 450, canEdit = t
                                           </td>
                                           <td className="py-3 pr-4">
                                             <input
-                                              classname="input-field text-sm py-1.5 text-right"
+                                              className="input-field text-sm py-1.5 text-right"
                                               type="number"
                                               value={editForm.rate}
                                               onChange={(e) => setEditForm({ ...editForm, rate: e.target.value })}
@@ -175,7 +175,7 @@ export function EstimateLabourLines({ estimateId, defaultRate = 450, canEdit = t
                                           </td>
                                           <td className="py-3">
                                             <div className="flex items-center justify-end gap-1">
-                                                <button onClick={() => handleEdit(line.id)} className="p.15 rounded-lg text-emerald-400 hover:bg-surface-700">
+                                                <button onClick={() => handleEdit(line.id)} className="p-1.5 rounded-lg text-emerald-400 hover:bg-surface-700">
                                                     <Check className="w-4 h-4" />
                                                 </button>
                                                 <button onClick={() => setEditingId(null)} className="p-1.5 rounded-lg text-surface-400 hover:bg-surface-700">

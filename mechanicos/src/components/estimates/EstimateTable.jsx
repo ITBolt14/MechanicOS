@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-reouter-dom'
+import { useNavigate } from 'react-router-dom'
 import { ChevronRight, Trash2, Copy, Car, User } from 'lucide-react'
 import { EstimateStatusBadge } from './EstimateStatusBadge'
 
-export function EstimateTable({ estimate, onDelete, onDuplicate }) {
+export function EstimateTable({ estimates, onDelete, onDuplicate }) {
     const navigate = useNavigate()
 
-    const getCustomername = (customer) => {
+    const getCustomerName = (customer) => {
         if (!customer) return '-'
         if (customer.customer_type === 'company') return customer.company_name
         return `${customer.first_name || ''} ${customer.last_name || ''}`.trim()
@@ -57,7 +57,7 @@ export function EstimateTable({ estimate, onDelete, onDuplicate }) {
                                     <div className="flex items-center gap-1.5">
                                         <User className="w-3 h-3 text-surface-500" />
                                         <span className="text-sm font-medium text-white">
-                                            {getCustomername(estimate.customers)}
+                                            {getCustomerName(estimate.customers)}
                                         </span>
                                     </div>
                                     {estimate.vehicles && (

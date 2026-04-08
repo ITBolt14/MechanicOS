@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuthStore } from '../stores/authStore'
-import toast from  'react-hot-react'
+import toast from  'react-hot-toast'
 
 export function useEstimateLines(estimateId) {
     const { company } = useAuthStore()
@@ -127,7 +127,7 @@ export function useEstimateLines(estimateId) {
         const { total, ...safe } = partData
         const { data, error } = await supabase
           .from('estimate_parts')
-          .insert({ ...safe, estimate_id: estimateId, company_id: companyId })
+          .insert({ ...safe, estimate_id: estimateId, company_id: company.id })
           .select()
           .single()
         if (error) { toast.error('Failed to add part'); return null }
